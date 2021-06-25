@@ -7,7 +7,7 @@ import "./math/Sqrt.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/token/ERC20/ERC20Detailed.sol";
+import "./ERC20Detailed.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
 
@@ -240,7 +240,7 @@ contract TREELON
 	        return rAmount.div(currentRate);
 	    }
 
-			function balanceOf(address account) public view override returns (uint256) {
+			function balanceOf(address account) public view returns (uint256) {
 	        if (_isExcluded[account]) return _tOwned[account];
 	        return tokenFromReflection(_rOwned[account]);
 	    }
@@ -253,7 +253,7 @@ contract TREELON
 					return _tFeeTotal;
 			}
 
-	    function excludeAccount(address account) private() {
+	    function excludeAccount(address account){
 	        require(!_isExcluded[account], "Account is already excluded");
 	        if(_rOwned[account] > 0) {
 	            _tOwned[account] = tokenFromReflection(_rOwned[account]);
@@ -262,7 +262,7 @@ contract TREELON
 	        _excluded.push(account);
 	    }
 
-	    function includeAccount(address account) private() {
+	    function includeAccount(address account){
 	        require(_isExcluded[account], "Account is already excluded");
 	        for (uint256 i = 0; i < _excluded.length; i++) {
 	            if (_excluded[i] == account) {
@@ -831,8 +831,8 @@ function _transferBothExcluded(address sender, address recipient, uint256 tAmoun
       }
     }
 
-		excludeAccount(_from)
-    _mint(_to, tokenValue);
+		excludeAccount(_from);
+        _mint(_to, tokenValue);
 		////exclude general accounts from static reflections.. only NFTART earns reflections
   }
 
@@ -997,8 +997,8 @@ function _transferBothExcluded(address sender, address recipient, uint256 tAmoun
     uint _minCurrencyReturned
   ) public
   {
-		uint _sellFee = _quantityToSell.mul(.015)
-		_quantityToSell = _quantityToSell.sub(_sellFee)
+		uint _sellFee = _quantityToSell.mul(.015);
+		_quantityToSell = _quantityToSell.sub(_sellFee);
     _sell(msg.sender, _to, _quantityToSell, _minCurrencyReturned);
   }
 
