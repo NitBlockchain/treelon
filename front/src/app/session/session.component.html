@@ -1,0 +1,80 @@
+<!-- main content -->
+<main class="main">
+  <div class="container">
+    <div class="row row--grid">
+      <!-- sign in -->
+      <div class="col-12">
+        <div class="sign">
+          <div class="sign__content">
+            <!-- authorization form -->
+            <form action="#" class="sign__form" [formGroup]="_login" *ngIf="type=='login'">
+              <a href="index.html" class="sign__logo">
+                <img src="img/logo.svg" alt="">
+              </a>
+
+              <div class="sign__group">
+                <input type="text" class="sign__input" placeholder="Email" formControlName="email">
+              </div>
+
+              <div class="sign__group">
+                <input type="password" class="sign__input" placeholder="Password" formControlName="password">
+              </div>
+
+              <div class="sign__group sign__group--checkbox">
+                <input id="remember" name="remember" type="checkbox" checked="checked">
+                <label for="remember">Remember Me</label>
+              </div>
+
+              <button class="sign__btn" type="button" (click)="login()">Sign in</button>
+
+              <span class="sign__text">Don't have an account? <a href="javascript: void(0)" (click)="type='register'">Sign up!</a></span>
+
+              <span class="sign__text"><a href="javascript: void(0)">Forgot password?</a></span>
+            </form>
+            <!-- end authorization form -->
+            <form action="#" class="sign__form" [formGroup]="_register" *ngIf="type=='register'">
+              <a href="index.html" class="sign__logo">
+                <img src="img/logo.svg" alt="">
+              </a>
+              <div class="sign__group">
+                <input type="text" class="sign__input" placeholder="User Name" formControlName="name">
+              </div>
+
+              <div class="sign__group">
+                <input type="text" class="sign__input" placeholder="Email" formControlName="email">
+              </div>
+
+              <div class="sign__group">
+                <input type="password" class="sign__input" placeholder="Password" formControlName="password">
+              </div>
+
+              <div class="sign__group sign__group--checkbox">
+                <input id="remember" name="remember" type="checkbox" formControlName="agree">
+                <label for="remember">Accept Agreement</label>
+              </div>
+
+              <button class="sign__btn" type="button" (click)="register()">Sign up</button>
+
+              <span class="sign__text">Already have an account <a href="javascript: void(0)" (click)="type='login'">Login!</a></span>
+            </form>
+
+            <form action="#" class="sign__form" [formGroup]="_confirm" *ngIf="type=='confirm'">
+              <a href="index.html" class="sign__logo">
+                <img src="img/logo.svg" alt="">
+              </a>
+              <div class="sign__group">
+                <input type="text" class="sign__input" placeholder="code" formControlName="code">
+              </div>
+
+              <button class="sign__btn" type="button" (click)="confirm()">Confirm</button>
+
+              <span class="sign__text">Already have an account <a href="javascript: void(0)" (click)="type='login'">Login!</a></span>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- end sign in -->
+    </div>
+  </div>
+</main>
+<!-- end main content -->

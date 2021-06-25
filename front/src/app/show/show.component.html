@@ -1,0 +1,126 @@
+<div class="row row-sm mt-4" *ngIf="COLLECTION">
+
+  <div class="col-sm-12 col-lg-4 col-xl-4 mb-3">
+    <img src="{{COLLECTION.image}}" class="img-responsive img-thumbnail" style="width:100%; height:auto">
+  </div>
+  <div class="col-sm-12 col-lg-4 col-xl-4 mb-3">
+    <div class="card bg-primary custom-card card-box">
+      <div class="card-body p-4">
+        <div class="row align-items-center">
+          <div class="col-lg-12 col-sm-6 col-12">
+            <h4 class="d-flex  mb-3">
+              <span class="font-weight-bold text-white ">{{COLLECTION.name}}</span>
+            </h4>
+            <p class="tx-white-7 mb-1">{{COLLECTION.description}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card bg-success custom-card card-box">
+      <div class="card-body p-4">
+        <div class="row align-items-center">
+          <div class="col-lg-12 col-sm-6 col-12">
+            <h4 class="d-flex  mb-3">
+              <span class="font-weight-bold text-white "><small>by:</small> {{ownername}}</span>
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row row-sm justify-content-center">
+      <div class="col-4" *ngIf="COLLECTION.youtube">
+        <a href="{{COLLECTION.youtube}}" target="_blank"><img src="/assets/icons/youtube.png" class="img-responsive" /></a>
+      </div>
+      <div class="col-4" *ngIf="COLLECTION.soundcloud">
+        <a href="{{COLLECTION.soundcloud}}" target="_blank"><img src="/assets/icons/soundcloud.png" class="img-responsive" /></a>
+      </div>
+      <div class="col-4" *ngIf="COLLECTION.bandlab">
+        <a href="{{COLLECTION.bandlab}}" target="_blank"><img src="/assets/icons/bandlab.png" class="img-responsive" /></a>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-sm-12 col-lg-4 col-xl-4 mb-3">
+    <div class="card custom-card">
+      <div class="card-body">
+        <div class="card-item">
+
+          <div class="card-item-title mb-2">
+            <label class="main-content-label tx-13 font-weight-bold mb-1">Collection Value</label>
+            <span class="d-block tx-12 mb-0 text-muted">Value of total NFT's in collection</span>
+          </div>
+          <div class="card-item-body">
+            <div class="card-item-stat">
+              <h4 class="font-weight-bold">$1,000.00</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<hr />
+<div class="row row-sm" *ngIf="COLLECTION">
+  <div class="col-md-4 col-lg-4 col-xl-4 col-sm-6" *ngIf="NFTS && NFTS.length>0">
+    <div class="card custom-card" *ngFor="let data of NFTS">
+      <div class="p-0 ht-100p">
+        <div class="product-grid">
+          <div class="product-image">
+            <a href="javascript: void(0)" class="image">
+              <img class="pic-1" alt="product-image-1" src="{{data.image}}">
+            </a>
+            <span class="product-discount-label bg-info">${{data.price}}</span>
+            <div class="product-link">
+              <a href="javascript: void(0)">
+                <i class="fab fa-bitcoin"></i>
+                <span>BUY</span>
+              </a>
+              <a href="javascript: void(0)">
+                <i class="fas fa-arrow-right"></i>
+                <span>Reserve</span>
+              </a>
+            </div>
+          </div>
+          <div class="product-content">
+            <h3 class="title"><a href="javascript: void(0)">{{data.title}}</a></h3>
+            <h3 class="title"><a href="javascript: void(0)">{{data.quantity}} Digital prints</a></h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row row-sm" *ngIf="COLLECTION && COLLECTION.story">
+  <div class="col-lg-12 col-md-12">
+    <div class="card custom-card">
+      <div class="card-body">
+        <div>
+          <h6 class="main-content-label mb-1">Story / Lyrics</h6>
+          <p class="text-muted card-sub-title">Story / Lyrics to this collection</p>
+        </div>
+        <div [ngxSummernoteView]="COLLECTION.story"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row row-sm" *ngIf="owner==user && COLLECTION && COLLECTION.story">
+  <div class="col-lg-12 col-md-12">
+    <div class="card custom-card">
+      <div class="card-body">
+        <div>
+          <h6 class="main-content-label mb-1">Add or Edit Story</h6>
+          <p class="text-muted card-sub-title">Add the story, lyrics etc to this NFTea</p>
+        </div>
+        <form [formGroup]="_story">
+          <div [ngxSummernote]="config" formControlName="story">{{COLLECTION.story}}</div>
+
+        </form>
+        <div class=text-center>
+          <button class="btn btn-primary mt-4" (click)="addStory()">Add / Edit Story</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
